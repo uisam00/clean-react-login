@@ -4,3 +4,7 @@ coverage
 
 public
 *.scss
+
+/*
+!/src/
+!/src/**
