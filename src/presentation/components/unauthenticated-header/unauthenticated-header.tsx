@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import Styles from './unauthenticated-header-styles.scss'
-import { Logo } from '../logo'
+import { Logo } from '@/presentation/components'
 
 const UnauthenticatedHeader: React.FC = () => {
   return (
