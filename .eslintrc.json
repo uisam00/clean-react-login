@@ -16,8 +16,13 @@
     "eslint-plugin-import-helpers",
     "prettier"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
