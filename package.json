@@ -5,7 +5,8 @@
   "author": "Ui Sam <sam.santos@intmed.com.br>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "npx http-server ./dist",
+    "dev": "webpack-dev-server --open",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTests",
