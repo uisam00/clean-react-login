@@ -15,6 +15,7 @@
     "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.1.2",
     "@types/faker": "4.1.11",
     "@types/jest": "^25.2.1",
     "@types/node": "^14.14.17",
