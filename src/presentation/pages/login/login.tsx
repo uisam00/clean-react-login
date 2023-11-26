@@ -1,9 +1,9 @@
 import React from 'react'
 import Styles from './login-styles.scss'
-import Spinner from '@/presentation/components/spinner/spinner'
 import { UnauthenticatedHeader as Header } from '@/presentation/components/unauthenticated-header'
 import Footer from '@/presentation/components/footer/footer'
 import { Input } from '@/presentation/components/input'
+import { FormStatus } from '@/presentation/components/form-status'
 
 const Login: React.FC = () => {
   return (
@@ -19,10 +19,7 @@ const Login: React.FC = () => {
         <a className={Styles.link} href="https://www.google.com/">
           Criar conta
         </a>
-        <div className={Styles.errorWrap}>
-          <Spinner />
-          <span className={Styles.error}>Erro</span>
-        </div>
+        <FormStatus />
       </form>
       <Footer />
     </div>
