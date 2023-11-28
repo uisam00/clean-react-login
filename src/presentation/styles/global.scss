@@ -42,7 +42,12 @@ button {
   line-height: 60px;
   border: none;
 
-  &:hover {
+  &:disabled {
+    background-color: $disabledBackground;
+    color: $disabledText;
+  }
+
+  &:not(:disabled):hover {
     opacity: 0.9;
   }
 }
