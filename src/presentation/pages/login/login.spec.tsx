@@ -24,18 +24,30 @@ const makeSut = (): SutTypes => {
 describe('Login Component', () => {
   afterEach(cleanup)
 
-  test('Should start with initial state', () => {
-    const { sut, validationStub } = makeSut()
+  test('Should start without main error', () => {
+    const { sut } = makeSut()
 
     const errorWrap = sut.getByTestId('error-wrap')
     expect(errorWrap.childElementCount).toBe(0)
+  })
+
+  test('Should start with submit button disabled', () => {
+    const { sut } = makeSut()
 
     const submitButton = sut.getByTestId('submit') as HTMLButtonElement
     expect(submitButton.disabled).toBe(true)
+  })
+
+  test('Should start state and call validation with correct email', () => {
+    const { sut, validationStub } = makeSut()
 
     const emailStatus = sut.getByTestId('email-status')
     expect(emailStatus.title).toBe(validationStub.errorMessage)
     expect(emailStatus.textContent).toBe('🔴')
+  })
+
+  test('Should call validation with correct email', () => {
+    const { sut, validationStub } = makeSut()
 
     const passwordStatus = sut.getByTestId('password-status')
     expect(passwordStatus.title).toBe(validationStub.errorMessage)
