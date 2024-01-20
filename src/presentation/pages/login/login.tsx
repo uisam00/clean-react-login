@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Styles from './login-styles.scss'
 import { UnauthenticatedHeader as Header, Footer, Input, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
@@ -66,9 +67,9 @@ const Login: React.FC<Props> = ({ validation, authentication }) => {
           >
             Entrar
           </button>
-          <a className={Styles.link} href="https://www.google.com/">
+          <Link data-testid="signup" to="/signup" className={Styles.link}>
             Criar conta
-          </a>
+          </Link>
           <FormStatus />
         </form>
       </Context.Provider>

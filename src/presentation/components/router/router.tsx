@@ -1,14 +1,13 @@
 import { Login } from '@/presentation/pages'
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" />
-        <Route path="/login" Component={Login} />
-      </Routes>
+      <Switch>
+        <Route path="/login" exact component={Login} />
+      </Switch>
     </BrowserRouter>
   )
 }
