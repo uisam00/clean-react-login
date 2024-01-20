@@ -39,7 +39,8 @@ const Login: React.FC<Props> = ({ validation, authentication }) => {
         isLoading: true,
       })
 
-      await authentication.auth({ email: state.email, password: state.password })
+      const account = await authentication.auth({ email: state.email, password: state.password })
+      localStorage.setItem('accessToken', account.accessToken)
     } catch (error) {
       setState({
         ...state,
@@ -53,7 +54,7 @@ const Login: React.FC<Props> = ({ validation, authentication }) => {
     <div className={Styles.login}>
       <Header />
       <Context.Provider value={{ state, setState }}>
-        <form data-testId="form" className={Styles.form} onSubmit={handleSubmit}>
+        <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
           <Input type="email" name="email" placeholder="Digite seu e-mail" />
           <Input type="password" name="password" placeholder="Digite sua senha" />
