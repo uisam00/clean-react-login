@@ -4,8 +4,9 @@ import { FieldValidation } from '@/validation/protocols'
 export class EmailValidation implements FieldValidation {
   constructor(readonly field: string) {}
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   validate(value: string): Error {
-    return new InvalidFieldError(this.field)
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    return emailRegex.test(value) ? null : new InvalidFieldError(this.field)
   }
 }
