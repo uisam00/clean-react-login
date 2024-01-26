@@ -1,4 +1,4 @@
-import { HttpPostClient, HttpPostParams, HttpResponse } from '@/data/protocols/http'
+import { HttpPostClient, HttpPostParams, HttpResponse, HttpStatusCode } from '@/data/protocols/http'
 import axios from 'axios'
 
 export class AxiosHttpClient implements HttpPostClient<any, any> {
@@ -7,7 +7,21 @@ export class AxiosHttpClient implements HttpPostClient<any, any> {
     try {
       httpResponse = await axios.post(params.url, params.body)
     } catch (error) {
-      httpResponse = error.response
+      console.log(error.request)
+
+      if (error.response) {
+        httpResponse = error.response
+      } else if (error.request) {
+        httpResponse = {
+          status: HttpStatusCode.serverUnavailable,
+        }
+      }
+      // else {
+      //   return {
+      //     statusCode: HttpStatusCode.serverError,
+      //     body: null,
+      //   }
+      // }
     }
 
     return {

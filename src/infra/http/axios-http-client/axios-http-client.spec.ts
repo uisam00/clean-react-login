@@ -2,6 +2,7 @@ import { AxiosHttpClient } from './axios-http-client'
 import { mockAxios, mockHttpResponse } from '@/infra/test'
 import axios from 'axios'
 import { mockPostRequest } from '@/data/tests'
+import { HttpStatusCode } from '@/data/protocols/http'
 
 jest.mock('axios')
 
@@ -40,5 +41,15 @@ describe('AxiosHttpClient', () => {
     })
     const promise = sut.post(mockPostRequest())
     expect(promise).toEqual(mockedAxios.post.mock.results[0].value)
+  })
+
+  test('Should return the correct status code when there is no response in error but has request', async () => {
+    const { sut, mockedAxios } = makeSut()
+    mockedAxios.post.mockRejectedValueOnce({ response: undefined, request: {} })
+
+    const error = await sut.post(mockPostRequest())
+    expect(error).toEqual({
+      statusCode: HttpStatusCode.serverUnavailable,
+    })
   })
 })
