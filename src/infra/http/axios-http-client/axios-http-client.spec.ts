@@ -43,13 +43,23 @@ describe('AxiosHttpClient', () => {
     expect(promise).toEqual(mockedAxios.post.mock.results[0].value)
   })
 
-  test('Should return the correct status code when there is no response in error but has request', async () => {
+  test('Should return the correct status code when there is no response but has request in error body', async () => {
     const { sut, mockedAxios } = makeSut()
     mockedAxios.post.mockRejectedValueOnce({ response: undefined, request: {} })
 
     const error = await sut.post(mockPostRequest())
     expect(error).toEqual({
       statusCode: HttpStatusCode.serverUnavailable,
+    })
+  })
+
+  test('Should return the correct status code when there is no response and request in error body', async () => {
+    const { sut, mockedAxios } = makeSut()
+    mockedAxios.post.mockRejectedValueOnce({ response: undefined, request: undefined })
+
+    const error = await sut.post(mockPostRequest())
+    expect(error).toEqual({
+      statusCode: HttpStatusCode.configRequestError,
     })
   })
 })

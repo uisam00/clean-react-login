@@ -15,13 +15,11 @@ export class AxiosHttpClient implements HttpPostClient<any, any> {
         httpResponse = {
           status: HttpStatusCode.serverUnavailable,
         }
+      } else {
+        httpResponse = {
+          status: HttpStatusCode.configRequestError,
+        }
       }
-      // else {
-      //   return {
-      //     statusCode: HttpStatusCode.serverError,
-      //     body: null,
-      //   }
-      // }
     }
 
     return {
