@@ -1,18 +1,9 @@
 import React from 'react'
 import { Login } from '@/presentation/pages'
-import { RemoteAuthentication } from '@/data/usecases/authentication/remote-authentication'
-import { AxiosHttpClient } from '@/infra/http/axios-http-client/axios-http-client'
-import { ValidationBuilder as Builder, ValidationComposite } from '@/validation/validators'
+
+import { makeRemoteAuthentication } from '@/main/factories/usecases'
+import { makeLoginValidation } from './login-validation-factory'
 
 export const makeLogin: React.FC = () => {
-  const url = 'http://localhost:5050/api/login'
-  const axiosHttpClient = new AxiosHttpClient()
-  const removeAuthentication = new RemoteAuthentication(url, axiosHttpClient)
-
-  const validationComposite = ValidationComposite.build([
-    ...Builder.field('email').required().email().build(),
-    ...Builder.field('password').required().min(5).build(),
-  ])
-
-  return <Login authentication={removeAuthentication} validation={validationComposite} />
+  return <Login authentication={makeRemoteAuthentication()} validation={makeLoginValidation()} />
 }
