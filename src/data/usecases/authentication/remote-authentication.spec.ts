@@ -1,7 +1,7 @@
 import { HttpPostClientSpy } from '@/data/tests'
 import { RemoteAuthentication } from './remote-authentication'
 import { mockAccountModel, mockAuthentication } from '@/domain/tests'
-import { InvalidCredentialsError, NoResponseFromServer, UnexpectedError } from '@/domain/errors'
+import { ConfigRequestError, InvalidCredentialsError, NoResponseFromServer, UnexpectedError } from '@/domain/errors'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { AuthenticationParams } from '@/domain/usecases'
 import { AccountModel } from '@/domain/models'
@@ -81,6 +81,15 @@ describe('RemoteAuthentication', () => {
     }
     const promise = sut.auth(mockAuthentication())
     await expect(promise).rejects.toThrow(new NoResponseFromServer())
+  })
+
+  test('Should throw ConfigRequestError if HttpPostClient returns 6606', async () => {
+    const { sut, httpPostClientSpy } = makeSut()
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.configRequestError,
+    }
+    const promise = sut.auth(mockAuthentication())
+    await expect(promise).rejects.toThrow(new ConfigRequestError())
   })
 
   test('Should return an AccountModel if HttpPostClient returns 200', async () => {
