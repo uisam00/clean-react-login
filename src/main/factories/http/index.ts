@@ -1,2 +1,2 @@
 export * from './axios-http-client-factory'
-export * from './api-base-url-factory'
+export * from './api-url-factory'
