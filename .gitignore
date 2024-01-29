@@ -4,3 +4,6 @@ coverage
 
 public/js
 yarn-error.log
+
+.env
+.env.*

@@ -8,3 +8,6 @@ public
 /*
 !/src/
 !/src/**
+
+.env
+.env.*
